@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Kokoro Local — Text to speech</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">◖</span> kokoro<span class="brand-muted">/ local</span></div>
+      <span class="local-label"><span class="local-dot" aria-hidden="true"></span> Runs on your machine</span>
+    </header>
+
+    <main>
+      <div class="intro">
+        <p class="kicker">TEXT TO SPEECH STUDIO</p>
+        <h1>Give your words<br><span>a voice.</span></h1>
+        <p class="description">Turn text into natural-sounding audio with Kokoro, right on your computer.</p>
+      </div>
+
+      <section class="workspace" aria-label="Speech generator">
+        <form id="speech-form">
+          <div class="field-head"><label for="text">Your text</label><span id="count">0 / 5,000</span></div>
+          <textarea id="text" name="text" maxlength="5000" required placeholder="Type or paste what you’d like to hear…" aria-describedby="text-hint"></textarea>
+          <p class="hint" id="text-hint">Add a pause with <code>&lt;break time="0.2s" /&gt;</code> (up to 10 seconds per break).</p>
+          <div class="controls">
+            <div class="settings">
+              <div class="voice-field">
+                <label for="voice">Voice</label>
+                <select id="voice" name="voice" required disabled><option value="">Loading voices…</option></select>
+              </div>
+              <div class="speed-field">
+                <label for="speed">Speed <output id="speed-value" for="speed">1.00×</output></label>
+                <input id="speed" name="speed" type="range" min="0.5" max="2" step="0.05" value="1" aria-describedby="speed-hint">
+                <span class="sr-only" id="speed-hint">Adjust voice speed from 0.5 to 2 times normal.</span>
+              </div>
+            </div>
+            <button class="generate" type="submit" id="generate" disabled><span id="generate-label">Generate audio</span><span aria-hidden="true">↗</span></button>
+          </div>
+        </form>
+        <div id="status" class="status" role="status" aria-live="polite">Select a voice and enter text to get started.</div>
+        <div id="result" class="result" hidden>
+          <div class="result-heading"><span class="result-icon" aria-hidden="true">♫</span><div><strong>Audio is ready</strong><small id="result-voice"></small></div></div>
+          <audio id="player" controls preload="metadata" aria-label="Generated speech"></audio>
+          <a id="download" class="download" download="kokoro-speech.mp3" href="#">Download MP3 <span aria-hidden="true">↓</span></a>
+        </div>
+      </section>
+      <p class="footnote">The first generation may take a few minutes while the model and voice files download. Later runs are faster.</p>
+    </main>
+    <footer>Kokoro Local <span>·</span> Private by default. No cloud API required after the initial model download.</footer>
+  </div>
+</body>
+</html>
